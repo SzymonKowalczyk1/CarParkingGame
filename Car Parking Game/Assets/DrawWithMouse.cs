@@ -22,7 +22,10 @@ public class DrawWithMouse : MonoBehaviour
     public void StartLine(Vector2 position)
     {
         line.positionCount = 1;
+        line.SetPosition(0, position);
         line.startWidth = line.endWidth = width;
+
+        previousPosition = position; // Set the previous position to the starting point
     }
 
     public void UpdateLine()
