@@ -6,6 +6,7 @@ public class ParkingSpot : MonoBehaviour
 {
 
     [SerializeField] private float parkingAngleTolerance = 15f;
+    [SerializeField] private CoinRatingSystem coinRatingSystem;
 
     private bool levelCompleted = false;
 
@@ -54,12 +55,28 @@ public class ParkingSpot : MonoBehaviour
         levelCompleted = true;
         Debug.Log("Success! Car parked correctly.");
 
-        // Make the parking spot change color to indicate success (optional)
+        if (coinRatingSystem != null)
+        {
+            coinRatingSystem.ShowRating();
+        }
+        else
+        {
+            Debug.LogWarning("CoinRatingSystem reference is missing on ParkingSpot!");
+        }
+
+        // Make the parking spot change color to indicate success
         SpriteRenderer sprite = GetComponent<SpriteRenderer>();
         if (sprite != null)
         {
             sprite.color = Color.green;
         }
-    }
 
+        // Optional: Disable car controls to prevent further movement
+        if (car.drawControll != null)
+        {
+            car.enabled = false;
+        }
+    }
 }
+
+
