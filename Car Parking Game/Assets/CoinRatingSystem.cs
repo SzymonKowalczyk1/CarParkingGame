@@ -24,6 +24,7 @@ public class CoinRatingSystem : MonoBehaviour
     public string nextLevelName;
 
     private bool ratingShown = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,10 +43,10 @@ public class CoinRatingSystem : MonoBehaviour
     public void ShowRating()
     {
         if (ratingShown) return;
-
         ratingShown = true;
-        int collectedCoins = coinManager.coinCount;
 
+        int collectedCoins = coinManager.coinCount;
+       
         // Show the result panel
         resultPanel.SetActive(true);
 
@@ -76,26 +77,31 @@ public class CoinRatingSystem : MonoBehaviour
             }
         }
 
-        // Update the coin icons
+
+        // APPROACH 1: Use SetActive directly on each coin icon's GameObject
         for (int i = 0; i < coinIcons.Length; i++)
         {
             if (coinIcons[i] != null)
             {
-                // Enable icons up to the number of coins collected
-                coinIcons[i].enabled = i < collectedCoins;
-
-                // Optional: Add a highlight effect to filled coins
+                // Show/hide based on collected coins
                 if (i < collectedCoins)
                 {
-                    coinIcons[i].color = Color.yellow; // Bright yellow for collected coins
+                    coinIcons[i].gameObject.SetActive(true);
+                    coinIcons[i].color = Color.white;
                 }
                 else
                 {
-                    coinIcons[i].color = new Color(0.5f, 0.5f, 0.5f, 0.5f); // Dim gray for uncollected coins
+                    coinIcons[i].gameObject.SetActive(false);
                 }
             }
+            else
+            {
+                Debug.Log("Warning: Coin icon " + i + " is null!");
+            }
         }
+
     }
+
     public void RestartLevel()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(
@@ -109,5 +115,4 @@ public class CoinRatingSystem : MonoBehaviour
             UnityEngine.SceneManagement.SceneManager.LoadScene(nextLevelName);
         }
     }
-
 }

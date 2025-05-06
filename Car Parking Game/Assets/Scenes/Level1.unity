@@ -2607,9 +2607,9 @@ MonoBehaviour:
   resultText: {fileID: 627287383}
   messageText: {fileID: 1112140814}
   coinIcons:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1210862523}
+  - {fileID: 318934721}
+  - {fileID: 118727759}
   restartButton: {fileID: 498555946}
   nextLevelButton: {fileID: 397028278}
   totalCoins: 3
@@ -2663,7 +2663,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1835218779
 RectTransform:
   m_ObjectHideFlags: 0
