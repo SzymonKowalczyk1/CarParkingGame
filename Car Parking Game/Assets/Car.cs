@@ -10,9 +10,10 @@ public class Car : MonoBehaviour
     Vector3[] positions;
     bool startMovment = false;
     int moveIndex;
+    private bool isGameOver = false;
     private void OnMouseDown()
     {
-        if (!startMovment)
+        if (!startMovment && !isGameOver)
         {
             drawControll.StartLine(transform.position);
         }
@@ -21,7 +22,7 @@ public class Car : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        if (!startMovment)
+        if (!startMovment && !isGameOver)
         {
             drawControll.UpdateLine();
         }
@@ -30,7 +31,7 @@ public class Car : MonoBehaviour
     }
     private void OnMouseUp()
     { 
-        if (!startMovment)
+        if (!startMovment && !isGameOver)
         {
             positions = new Vector3[drawControll.line.positionCount];
             drawControll.line.GetPositions(positions);
@@ -46,6 +47,7 @@ public class Car : MonoBehaviour
     }
     private void Update()
     {
+        if (isGameOver) return;
         if (startMovment == true && positions != null && positions.Length > 0)
         {
             Vector2 currentPos = positions[moveIndex];
@@ -73,6 +75,11 @@ public class Car : MonoBehaviour
             }
 
         }
+    }
+    public void StopCar()
+    {
+        startMovment = false;
+        isGameOver = true;
     }
     public float GetCurrentSpeed()
     {
