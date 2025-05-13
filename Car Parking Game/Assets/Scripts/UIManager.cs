@@ -13,6 +13,9 @@ public class UIManager : MonoBehaviour
     public Button startButton;
     public Button quitButton;
     public Button tutorialButton;
+    public Button skipTutorialButton; // Optional button to skip tutorial
+
+    private TutorialManager tutorialManager;
 
     void Start()
     {
@@ -29,6 +32,15 @@ public class UIManager : MonoBehaviour
             
         if (tutorialButton != null)
             tutorialButton.onClick.AddListener(StartTutorial);
+            
+        // Find tutorial manager if we're in the tutorial scene
+        tutorialManager = FindObjectOfType<TutorialManager>();
+        
+        // Setup skip tutorial button if available
+        if (skipTutorialButton != null && tutorialManager != null)
+        {
+            skipTutorialButton.onClick.AddListener(SkipTutorial);
+        }
     }
 
     // Start the first level
@@ -41,6 +53,15 @@ public class UIManager : MonoBehaviour
     public void StartTutorial()
     {
         SceneManager.LoadScene("Tutorial");
+    }
+    
+    // Skip the tutorial
+    public void SkipTutorial()
+    {
+        if (tutorialManager != null)
+        {
+            tutorialManager.SkipTutorial();
+        }
     }
 
     // Quit the game
