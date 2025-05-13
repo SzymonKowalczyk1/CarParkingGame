@@ -17,19 +17,14 @@ public class TutorialParkingSpot : MonoBehaviour
     {
         if (successIndicator != null)
             successIndicator.SetActive(false);
-            
-        if (directionArrow != null)
+    }
+    
+    // Public method to skip the tutorial
+    public void SkipTutorial()
+    {
+        if (tutorialManager != null)
         {
-            // Check if it's a UI element
-            if (directionArrow.GetComponent<RectTransform>() != null)
-            {
-                // UI arrow - animation is handled by TutorialUI
-            }
-            else
-            {
-                // World space arrow
-                StartCoroutine(PulseArrow());
-            }
+            tutorialManager.SkipTutorial();
         }
     }
     
@@ -113,39 +108,6 @@ public class TutorialParkingSpot : MonoBehaviour
                 // Tutorial was skipped, directly show completion
                 tutorialManager.ShowTutorialComplete();
             }
-        }
-    }
-    
-    private IEnumerator PulseArrow()
-    {
-        if (directionArrow == null) yield break;
-        
-        // This is for world-space objects, not UI
-        Transform arrowTransform = directionArrow.transform;
-        Vector3 originalScale = arrowTransform.localScale;
-        Vector3 targetScale = originalScale * 1.2f;
-        
-        while (true)
-        {
-            // Scale up
-            float t = 0;
-            while (t < 1)
-            {
-                t += Time.deltaTime;
-                arrowTransform.localScale = Vector3.Lerp(originalScale, targetScale, Mathf.SmoothStep(0, 1, t));
-                yield return null;
-            }
-            
-            // Scale down
-            t = 0;
-            while (t < 1)
-            {
-                t += Time.deltaTime;
-                arrowTransform.localScale = Vector3.Lerp(targetScale, originalScale, Mathf.SmoothStep(0, 1, t));
-                yield return null;
-            }
-            
-            yield return new WaitForSeconds(0.5f);
         }
     }
 } 

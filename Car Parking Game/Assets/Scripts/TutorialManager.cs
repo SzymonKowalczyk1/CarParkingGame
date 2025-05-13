@@ -21,6 +21,7 @@ public class TutorialManager : MonoBehaviour
     public GameObject tutorialCompletePanel;
     public Button nextLevelButton;
     public Button menuButton;
+    public Button skipButton; // Skip tutorial button
     
     [Header("Tutorial Settings")]
     [TextArea(3, 5)]
@@ -46,6 +47,13 @@ public class TutorialManager : MonoBehaviour
             
         if (menuButton != null)
             menuButton.onClick.AddListener(GoToMainMenu);
+            
+        // Setup skip button
+        if (skipButton != null)
+        {
+            skipButton.onClick.AddListener(SkipTutorial);
+            skipButton.gameObject.SetActive(true); // Make sure skip button is visible at start
+        }
             
         // Hide completion panel at start
         if (tutorialCompletePanel != null)
@@ -154,6 +162,10 @@ public class TutorialManager : MonoBehaviour
         if (tutorialArrow != null)
             tutorialArrow.gameObject.SetActive(false);
             
+        // Hide skip button as tutorial is already ended
+        if (skipButton != null)
+            skipButton.gameObject.SetActive(false);
+            
         // Show tutorial complete panel
         if (tutorialCompletePanel != null)
             tutorialCompletePanel.SetActive(true);
@@ -174,6 +186,10 @@ public class TutorialManager : MonoBehaviour
     // Show tutorial completion directly (used when tutorial was skipped)
     public void ShowTutorialComplete()
     {
+        // Hide skip button as tutorial is already ended
+        if (skipButton != null)
+            skipButton.gameObject.SetActive(false);
+            
         // Show tutorial complete panel
         if (tutorialCompletePanel != null)
             tutorialCompletePanel.SetActive(true);
