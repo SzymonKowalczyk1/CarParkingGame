@@ -4,11 +4,20 @@ using UnityEngine;
 
 public class ParkingSpot : MonoBehaviour
 {
-
     [SerializeField] private float parkingAngleTolerance = 15f;
     [SerializeField] private CoinRatingSystem coinRatingSystem;
+    [SerializeField] private GameManager gameManager;
 
     private bool levelCompleted = false;
+
+    private void Start()
+    {
+        // If gameManager is not assigned, try to find it in the scene
+        if (gameManager == null)
+        {
+            gameManager = FindObjectOfType<GameManager>();
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -25,6 +34,7 @@ public class ParkingSpot : MonoBehaviour
             }
         }
     }
+    
     private void OnTriggerStay2D(Collider2D collision)
     {
         // Skip if level already completed
@@ -40,6 +50,7 @@ public class ParkingSpot : MonoBehaviour
             }
         }
     }
+    
     private void CheckParking(Car car)
     {
         // Check if car is still moving
@@ -55,13 +66,22 @@ public class ParkingSpot : MonoBehaviour
         levelCompleted = true;
         Debug.Log("Success! Car parked correctly.");
 
+        // Show coin rating if available
         if (coinRatingSystem != null)
         {
             coinRatingSystem.ShowRating();
         }
         else
         {
-            Debug.LogWarning("CoinRatingSystem reference is missing on ParkingSpot!");
+            // If no coin rating system, use the game manager to show level complete
+            if (gameManager != null)
+            {
+                gameManager.ShowLevelCompletePanel();
+            }
+            else
+            {
+                Debug.LogWarning("Both CoinRatingSystem and GameManager references are missing on ParkingSpot!");
+            }
         }
 
         // Make the parking spot change color to indicate success

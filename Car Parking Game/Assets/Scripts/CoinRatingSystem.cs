@@ -11,6 +11,7 @@ public class CoinRatingSystem : MonoBehaviour
     public GameObject resultPanel;
     public TMP_Text resultText;
     public TMP_Text messageText;
+    public GameManager gameManager;
 
     [Header("Coin Icons")]
     public Image[] coinIcons; // Array of 3 coin images to show as rating
@@ -32,9 +33,24 @@ public class CoinRatingSystem : MonoBehaviour
         if (resultPanel != null)
             resultPanel.SetActive(false);
 
+        // Find GameManager if not assigned
+        if (gameManager == null)
+            gameManager = FindObjectOfType<GameManager>();
+
         // Setup buttons if they exist
-        if (nextLevelButton != null && !string.IsNullOrEmpty(nextLevelName))
-            nextLevelButton.onClick.AddListener(LoadNextLevel);
+        if (nextLevelButton != null)
+        {
+            // If we have a GameManager, use its LoadNextLevel method
+            if (gameManager != null)
+            {
+                nextLevelButton.onClick.AddListener(gameManager.LoadNextLevel);
+            }
+            // Otherwise use our own method
+            else if (!string.IsNullOrEmpty(nextLevelName))
+            {
+                nextLevelButton.onClick.AddListener(LoadNextLevel);
+            }
+        }
 
         if (restartButton != null)
             restartButton.onClick.AddListener(RestartLevel);
@@ -99,7 +115,6 @@ public class CoinRatingSystem : MonoBehaviour
                 Debug.Log("Warning: Coin icon " + i + " is null!");
             }
         }
-
     }
 
     public void RestartLevel()
