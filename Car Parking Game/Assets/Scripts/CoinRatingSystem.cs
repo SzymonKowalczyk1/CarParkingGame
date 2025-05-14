@@ -22,7 +22,7 @@ public class CoinRatingSystem : MonoBehaviour
 
     [Header("Settings")]
     public int totalCoins = 3; //Calkowita liczba monet do zebrania
-    public string nextLevelName;  //Nazwa nastepnego poziomu
+    public string nextLevelName; //Nazwa nastepnego poziomu
 
     private bool ratingShown = false; //Flaga pokazania oceny
 
