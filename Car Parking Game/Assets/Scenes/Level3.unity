@@ -3066,7 +3066,7 @@ MonoBehaviour:
   restartButton: {fileID: 1058754548}
   menuButton: {fileID: 378125496}
   nextLevelButton: {fileID: 1210783727}
-  nextLevelName: Level4
+  coinRatingSystem: {fileID: 1034609115}
   carController: {fileID: 532964488}
   drawController: {fileID: 1034609113}
 --- !u!114 &1034609115

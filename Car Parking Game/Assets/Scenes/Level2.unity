@@ -3368,9 +3368,9 @@ MonoBehaviour:
   gameOverPanel: {fileID: 1158803108}
   levelCompletePanel: {fileID: 0}
   restartButton: {fileID: 1963341426}
-  menuButton: {fileID: 1963341426}
+  menuButton: {fileID: 1932197057}
   nextLevelButton: {fileID: 2015785833}
-  nextLevelName: Level2
+  coinRatingSystem: {fileID: 1541833616}
   carController: {fileID: 241311588}
   drawController: {fileID: 1541833614}
 --- !u!114 &1541833616

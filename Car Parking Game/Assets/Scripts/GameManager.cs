@@ -16,10 +16,8 @@ public class GameManager : MonoBehaviour
     public Button menuButton;
     public Button nextLevelButton;
 
-
-    [Header("Level Settings")]
-    public string nextLevelName = "Level2";//Nazwa sceny nastepnego poziomu
-
+    [Header("References")]
+    public CoinRatingSystem coinRatingSystem; // Referencja do CoinRatingSystem
     public Car carController;
     public DrawWithMouse drawController;
 
@@ -54,6 +52,12 @@ public class GameManager : MonoBehaviour
         {
             nextLevelButton.onClick.RemoveAllListeners();
             nextLevelButton.onClick.AddListener(LoadNextLevel);
+        }
+        
+        // Znajdz CoinRatingSystem jesli nie jest przypisany
+        if (coinRatingSystem == null)
+        {
+            coinRatingSystem = FindObjectOfType<CoinRatingSystem>();
         }
     }
 
@@ -132,15 +136,11 @@ public class GameManager : MonoBehaviour
     //Funkcja ladowania nastepnego poziomu
     public void LoadNextLevel()
     {
-        //Pobiera nazwe aktualnej sceny
-        string currentSceneName = SceneManager.GetActiveScene().name;
-        
-        //Dla innych poziomow lub jesli nastepny poziom nie istnieje, uzyj zmiennej nextLevelName
-        if (!string.IsNullOrEmpty(nextLevelName))
+        //korzystamy z funkcji ktora jest juz w CoinRatingSystem
+        if (coinRatingSystem != null && !string.IsNullOrEmpty(coinRatingSystem.nextLevelName))
         {
-            SceneManager.LoadScene(nextLevelName);
+            SceneManager.LoadScene(coinRatingSystem.nextLevelName);
         }
-        //Powraca do menu glownego jesli nie zdefiniowano nastepnego poziomu
         else
         {
             SceneManager.LoadScene("MainMenu");
