@@ -4,38 +4,44 @@ using UnityEngine;
 
 public class DrawWithMouse : MonoBehaviour
 {
-    public LineRenderer line;
-    private Vector3 previousPosition;
+    public LineRenderer line; //Komponent do rysowania linii
+    private Vector3 previousPosition; //Poprzednia pozycja punktu linii
 
     [SerializeField]
-    private float minDistance = 0.1f; // Minimum distance to draw a new point
+    private float minDistance = 0.1f; //Minimalna odleglosc miedzy punktami linii
 
     [SerializeField, Range(0.1f,2f)]
-    private float width;
+    private float width; //Szerokosc linii
 
+    
     private void Start()
     {
         line = GetComponent<LineRenderer>();
         line.positionCount = 1; 
         previousPosition = transform.position;
     }
+    
+    //Rozpoczyna rysowanie linii od podanej pozycji
     public void StartLine(Vector2 position)
     {
         line.positionCount = 1;
         line.SetPosition(0, position);
         line.startWidth = line.endWidth = width;
 
-        previousPosition = position; // Set the previous position to the starting point
+        previousPosition = position; //Ustawia poprzednia pozycje na punkt poczatkowy
     }
 
+    //Aktualizuje linie podczas przeciagania myszka
     public void UpdateLine()
     {
         if (Input.GetMouseButton(0))
         {
+            //Konwertuj pozycje myszy na wspolrzedne
             Vector3 currentPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             currentPosition.z = 0f;
 
-            if (Vector3.Distance(currentPosition,previousPosition)> minDistance)
+            //Dodaj nowy punkt tylko jesli jest wystarczajaco oddalony od poprzedniego aby uniknac zbyt duzej ilosci punktow
+            if (Vector3.Distance(currentPosition, previousPosition) > minDistance)
             {
                 if(previousPosition == transform.position)
                 {
@@ -45,8 +51,6 @@ public class DrawWithMouse : MonoBehaviour
                 line.SetPosition(line.positionCount - 1, currentPosition);
                 previousPosition = currentPosition;
             }
-
-        
         }
     }
 }

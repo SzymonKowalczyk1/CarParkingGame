@@ -15,13 +15,13 @@ public class TutorialManager : MonoBehaviour
     public Button nextButton;
     public Image tutorialHighlight;
     public GameObject tutorialArrow;
-    public GameObject[] tutorialStepObjects; // Optional objects to enable/disable during tutorial
+    public GameObject[] tutorialStepObjects;
     
     [Header("Completion Panel")]
     public GameObject tutorialCompletePanel;
     public Button nextLevelButton;
     public Button menuButton;
-    public Button skipButton; // Skip tutorial button
+    public Button skipButton;
     
     [Header("Tutorial Settings")]
     [TextArea(3, 5)]
@@ -34,100 +34,71 @@ public class TutorialManager : MonoBehaviour
     
     void Start()
     {
-        // Initialize tutorial
+        //Inicjalizacja samouczka
         if (tutorialPanel != null)
             tutorialPanel.SetActive(true);
             
         if (nextButton != null)
             nextButton.onClick.AddListener(NextTutorialStep);
         
-        // Setup completion panel buttons
+        //Konfiguracja przyciskow panelu ukonczenia
         if (nextLevelButton != null)
             nextLevelButton.onClick.AddListener(GoToNextLevel);
             
         if (menuButton != null)
             menuButton.onClick.AddListener(GoToMainMenu);
             
-        // Setup skip button
+        //Konfiguracja przycisku pominiecia
         if (skipButton != null)
         {
             skipButton.onClick.AddListener(SkipTutorial);
-            skipButton.gameObject.SetActive(true); // Make sure skip button is visible at start
+            skipButton.gameObject.SetActive(true);
         }
             
-        // Hide completion panel at start
+        //Ukrywa panel ukonczenia na poczatku
         if (tutorialCompletePanel != null)
             tutorialCompletePanel.SetActive(false);
             
-        // Disable car controls until tutorial allows it
+        //Wylacza kontrolery samochodu dopoki samouczek na to nie pozwoli
         if (carController != null)
             carController.enabled = false;
             
         if (drawController != null)
             drawController.enabled = false;
             
-        // Show first tutorial step
+        //Pokazuje pierwszy krok samouczka
         ShowTutorialStep(0);
     }
     
+    //Pokazuje okreslony krok samouczka
     void ShowTutorialStep(int stepIndex)
     {
         if (stepIndex >= tutorialSteps.Length)
         {
-            // Tutorial complete
+            //Samouczek ukonczony
             EndTutorial();
             return;
         }
         
-        // Update text
+        //Aktualizuje tekst
         if (tutorialText != null)
             tutorialText.text = tutorialSteps[stepIndex];
-            
-        // Position highlight if needed
-        if (tutorialHighlight != null && stepIndex < highlightPositions.Length)
-        {
-            tutorialHighlight.gameObject.SetActive(true);
-            RectTransform rt = tutorialHighlight.GetComponent<RectTransform>();
-            if (rt != null)
-            {
-                rt.anchoredPosition = highlightPositions[stepIndex];
-            }
-        }
-        else if (tutorialHighlight != null)
-        {
-            tutorialHighlight.gameObject.SetActive(false);
-        }
-        
-        // Position arrow if needed
-        if (tutorialArrow != null && stepIndex < arrowPositions.Length)
-        {
-            tutorialArrow.gameObject.SetActive(true);
-            RectTransform rt = tutorialArrow.GetComponent<RectTransform>();
-            if (rt != null)
-            {
-                rt.anchoredPosition = arrowPositions[stepIndex];
-            }
-        }
-        else if (tutorialArrow != null)
-        {
-            tutorialArrow.gameObject.SetActive(false);
-        }
-        
-        // Enable specific objects for this step
+               
+        //Wlacza konkretne obiekty dla tego kroku
         for (int i = 0; i < tutorialStepObjects.Length; i++)
         {
             if (tutorialStepObjects[i] != null)
                 tutorialStepObjects[i].SetActive(i == stepIndex);
         }
         
-        // Enable car controls at specific steps if needed
-        if (stepIndex == 1) // Assuming step 2 is when we want to allow drawing
+        //Wlacz kontrolery samochodu na konkretnych krokache
+        if (stepIndex == 1) //krok 2 - w tym momencie mozna rysowac
         {
             if (drawController != null)
                 drawController.enabled = true;
         }
         
-        if (stepIndex == 2) // Assuming step 3 is when we want to allow car movement
+        if (stepIndex == 2) //krok 3 - mozna ruszyc samochod
         {
             if (carController != null)
                 carController.enabled = true;
@@ -136,23 +107,25 @@ public class TutorialManager : MonoBehaviour
         currentStep = stepIndex;
     }
     
+    //Przechodzi do nastepnego kroku samouczka
     public void NextTutorialStep()
     {
         ShowTutorialStep(currentStep + 1);
     }
     
+    //konczy samouczek
     void EndTutorial()
     {
         tutorialActive = false;
         
-        // Enable all controls
+        //Wlacza wszystkie kontrolery
         if (carController != null)
             carController.enabled = true;
             
         if (drawController != null)
             drawController.enabled = true;
             
-        // Hide tutorial UI
+        //Ukrywa UI samouczka
         if (tutorialPanel != null)
             tutorialPanel.SetActive(false);
             
@@ -162,40 +135,39 @@ public class TutorialManager : MonoBehaviour
         if (tutorialArrow != null)
             tutorialArrow.gameObject.SetActive(false);
             
-        // Hide skip button as tutorial is already ended
+        //Ukrywa przycisk pominiecia
         if (skipButton != null)
             skipButton.gameObject.SetActive(false);
             
-        // Show tutorial complete panel
+        //Pokazuje panel ukonczenia samouczka
         if (tutorialCompletePanel != null)
             tutorialCompletePanel.SetActive(true);
     }
     
-    // Call this method to skip the tutorial
+    //metida do pomijania samouczka
     public void SkipTutorial()
     {
         EndTutorial();
     }
     
-    // Check if tutorial is currently active
+    //Sprawdza czy samouczek jest aktualnie aktywny
     public bool IsTutorialActive()
     {
         return tutorialActive;
     }
     
-    // Show tutorial completion directly (used when tutorial was skipped)
+    //pokazuje ukonczenie samouczka
     public void ShowTutorialComplete()
     {
-        // Hide skip button as tutorial is already ended
+        //Ukrywa przycisk pominiecia
         if (skipButton != null)
             skipButton.gameObject.SetActive(false);
             
-        // Show tutorial complete panel
+        //Pokazuje panel ukonczenia samouczka
         if (tutorialCompletePanel != null)
             tutorialCompletePanel.SetActive(true);
     }
     
-    // Navigation methods
     public void GoToNextLevel()
     {
         SceneManager.LoadScene("Level1");

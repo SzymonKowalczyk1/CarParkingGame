@@ -14,48 +14,44 @@ public class CoinRatingSystem : MonoBehaviour
     public GameManager gameManager;
 
     [Header("Coin Icons")]
-    public Image[] coinIcons; // Array of 3 coin images to show as rating
+    public Image[] coinIcons; //Tablica ikon monet do pokazania ilosci monet
 
     [Header("Navigation")]
-    public Button restartButton;
-    public Button nextLevelButton;
+    public Button restartButton; //Przycisk restartu
+    public Button nextLevelButton; //Przycisk nastepnego poziomu
 
     [Header("Settings")]
-    public int totalCoins = 3;
-    public string nextLevelName;
+    public int totalCoins = 3; //Calkowita liczba monet do zebrania
+    public string nextLevelName; //Nazwa nastepnego poziomu
 
-    private bool ratingShown = false;
+    private bool ratingShown = false; //Flaga pokazania oceny
 
-    // Start is called before the first frame update
+    
     void Start()
     {
-        // Make sure result panel is hidden at start
+        //sprawdza czy panel wynikow jest ukryty na poczatku
         if (resultPanel != null)
             resultPanel.SetActive(false);
 
-        // Find GameManager if not assigned
-        if (gameManager == null)
-            gameManager = FindObjectOfType<GameManager>();
 
-        // Setup buttons if they exist
+        //Konfiguracja przyciskow
         if (nextLevelButton != null)
         {
-            // If we have a GameManager, use its LoadNextLevel method
-            if (gameManager != null)
-            {
-                nextLevelButton.onClick.AddListener(gameManager.LoadNextLevel);
-            }
-            // Otherwise use our own method
-            else if (!string.IsNullOrEmpty(nextLevelName))
+             if (!string.IsNullOrEmpty(nextLevelName))
+             
             {
                 nextLevelButton.onClick.AddListener(LoadNextLevel);
+
             }
+            
+            
         }
 
         if (restartButton != null)
             restartButton.onClick.AddListener(RestartLevel);
     }
 
+    //Pokazuje ocene na podstawie zebranych monet
     public void ShowRating()
     {
         if (ratingShown) return;
@@ -63,14 +59,14 @@ public class CoinRatingSystem : MonoBehaviour
 
         int collectedCoins = coinManager.coinCount;
        
-        // Show the result panel
+        //Pokaz panel wynikow
         resultPanel.SetActive(true);
 
-        // Update the result text
+        //Zaktualizuj tekst wyniku
         if (resultText != null)
             resultText.text = "Coins Collected: " + collectedCoins + "/" + totalCoins;
 
-        // Update the message based on coins collected
+        //Zaktualizuj wiadomosc na podstawie zebranych monet
         if (messageText != null)
         {
             switch (collectedCoins)
@@ -93,13 +89,12 @@ public class CoinRatingSystem : MonoBehaviour
             }
         }
 
-
-        // APPROACH 1: Use SetActive directly on each coin icon's GameObject
+        //Aktualizuje ikony monet
         for (int i = 0; i < coinIcons.Length; i++)
         {
             if (coinIcons[i] != null)
             {
-                // Show/hide based on collected coins
+                //Pokazuje/ukrywa na podstawie zebranych monet
                 if (i < collectedCoins)
                 {
                     coinIcons[i].gameObject.SetActive(true);
@@ -110,19 +105,17 @@ public class CoinRatingSystem : MonoBehaviour
                     coinIcons[i].gameObject.SetActive(false);
                 }
             }
-            else
-            {
-                Debug.Log("Warning: Coin icon " + i + " is null!");
-            }
         }
     }
 
+    //Restartuje aktualny poziom
     public void RestartLevel()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(
             UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 
+    //Laduje nastepny poziom
     public void LoadNextLevel()
     {
         if (!string.IsNullOrEmpty(nextLevelName))

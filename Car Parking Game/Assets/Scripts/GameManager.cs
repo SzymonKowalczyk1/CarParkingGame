@@ -5,70 +5,63 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
+
     [Header("Panels")]
-    public GameObject gameOverPanel; // Panel Game Over
-    public GameObject levelCompletePanel; // Panel for level completion
+    public GameObject gameOverPanel;
+    public GameObject levelCompletePanel;
     
 
     [Header("Buttons")]
-    public Button restartButton;     // Przycisk restartu
-    public Button mainMenuButton;    // Button to return to main menu
+    public Button restartButton;
     public Button menuButton;
-    public Button nextLevelButton;   // Button to go to next level
+    public Button nextLevelButton;
 
-    [Header("Level Settings")]
-    public string nextLevelName = "Level2"; // Name of the next level scene
-
+    [Header("References")]
+    public CoinRatingSystem coinRatingSystem; // Referencja do CoinRatingSystem
     public Car carController;
     public DrawWithMouse drawController;
 
-    private bool isGameOver = false;
+    private bool isGameOver = false; //Flaga konca gry
+    
     private void Start()
     {
-        // Ukryj GameOverPanel na pocztku gry
+        //Ukrywa panel porazki na poczatku gry
         if (gameOverPanel != null)
             gameOverPanel.SetActive(false);
             
-        // Hide level complete panel at start
+        //Ukrywa panel ukonczenia poziomu na poczatku
         if (levelCompletePanel != null)
             levelCompletePanel.SetActive(false);
 
-        // Jeli masz przycisk restartu, przypisz go
+        //Przypisanie listenera do przycisku restartu
         if (restartButton != null)
         {
-            // Remove any existing listeners first to avoid duplicates
             restartButton.onClick.RemoveAllListeners();
-            // Add our listener
             restartButton.onClick.AddListener(RestartLevel);
-            Debug.Log("Restart button listener added");
-        }
-        else
-        {
-            Debug.LogWarning("Restart button reference is missing!");
         }
         
-        // Assign main menu button listener
-        if (mainMenuButton != null)
-        {
-            mainMenuButton.onClick.RemoveAllListeners();
-            mainMenuButton.onClick.AddListener(ReturnToMainMenu);
-        }
-
+        //Przypisanie listenera do przycisku menu glownego
         if (menuButton != null)
         {
             menuButton.onClick.RemoveAllListeners();
             menuButton.onClick.AddListener(ReturnToMainMenu);
         }
         
-        // Assign next level button listener
+        //Przypisanie listenera do przycisku nastepnego poziomu
         if (nextLevelButton != null)
         {
             nextLevelButton.onClick.RemoveAllListeners();
             nextLevelButton.onClick.AddListener(LoadNextLevel);
         }
+        
+        // Znajdz CoinRatingSystem jesli nie jest przypisany
+        if (coinRatingSystem == null)
+        {
+            coinRatingSystem = FindObjectOfType<CoinRatingSystem>();
+        }
     }
 
-    // Ta metoda bdzie wywoywana po kolizji z "Wall"
+    //Wyswietla panel porazki po kolizji
     public void ShowGameOverPanel()
     {
         if (isGameOver) return;
@@ -76,14 +69,13 @@ public class GameManager : MonoBehaviour
         isGameOver = true;
         if (gameOverPanel != null)
         {
-            gameOverPanel.SetActive(true); // Poka panel Game Over
+            gameOverPanel.SetActive(true); //Pokaz panel porazki
             
-            // Re-add button listeners just to be safe
+  
             if (restartButton != null)
             {
                 restartButton.onClick.RemoveAllListeners();
                 restartButton.onClick.AddListener(RestartLevel);
-                Debug.Log("Restart button listener re-added in game over panel");
             }
             
             if (menuButton != null)
@@ -93,18 +85,20 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        //Zatrzymuje samochod
         if (carController != null)
         {
             carController.StopCar();
         }
 
+        //Wylacza rysowanie trasy
         if (drawController != null)
         {
             drawController.enabled = false;
         }
     }
     
-    // Show level complete panel
+    //Wyswietla panel ukonczenia poziomu
     public void ShowLevelCompletePanel()
     {
         if (isGameOver) return;
@@ -114,54 +108,39 @@ public class GameManager : MonoBehaviour
             levelCompletePanel.SetActive(true);
         }
         
+        //Wylacza kontroler samochodu
         if (carController != null)
         {
             carController.enabled = false;
         }
         
+        //Wylacza rysowanie trasy
         if (drawController != null)
         {
             drawController.enabled = false;
         }
     }
 
-    // Funkcja do restartu poziomu
+
     public void RestartLevel()
     {
-        Debug.Log("RestartLevel method called");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Restartuj scen
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); //Restartuje scene
     }
     
-    // Function to return to the main menu
+    //Funkcja powrotu do menu glownego
     public void ReturnToMainMenu()
     {
-        Debug.Log("ReturnToMainMenu method called");
         SceneManager.LoadScene("MainMenu");
     }
     
-    // Function to load the next level
+    //Funkcja ladowania nastepnego poziomu
     public void LoadNextLevel()
     {
-        Debug.Log("LoadNextLevel method called");
-        // Get the current scene name
-        string currentSceneName = SceneManager.GetActiveScene().name;
-        
-        // If we're in Level1, load Level2
-        if (currentSceneName == "Level1")
+        //korzystamy z funkcji ktora jest juz w CoinRatingSystem
+        if (coinRatingSystem != null && !string.IsNullOrEmpty(coinRatingSystem.nextLevelName))
         {
-            SceneManager.LoadScene("Level2");
+            SceneManager.LoadScene(coinRatingSystem.nextLevelName);
         }
-        // If we're in Level2, load Level3
-        else if (currentSceneName == "Level2")
-        {
-            SceneManager.LoadScene("Level3");
-        }
-        // For any other level or if next level doesn't exist, use the nextLevelName variable
-        else if (!string.IsNullOrEmpty(nextLevelName))
-        {
-            SceneManager.LoadScene(nextLevelName);
-        }
-        // Fallback to main menu if no next level is defined
         else
         {
             SceneManager.LoadScene("MainMenu");

@@ -11,18 +11,14 @@ public class GameOverPanel : MonoBehaviour
     
     void Start()
     {
-        // Set up restart button
+        //Konfiguracja przycisku restartu
         if (restartButton != null)
         {
             restartButton.onClick.RemoveAllListeners();
             restartButton.onClick.AddListener(RestartLevel);
         }
-        else
-        {
-            Debug.LogError("Restart button reference is missing in GameOverPanel!");
-        }
         
-        // Set up menu button
+        //Konfiguracja przycisku menu
         if (menuButton != null)
         {
             menuButton.onClick.RemoveAllListeners();
@@ -30,15 +26,15 @@ public class GameOverPanel : MonoBehaviour
         }
     }
     
+    //Restartuje aktualny poziom
     public void RestartLevel()
     {
-        Debug.Log("GameOverPanel: RestartLevel called");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     
+    //Powraca do menu glownego
     public void ReturnToMainMenu()
     {
-        Debug.Log("GameOverPanel: ReturnToMainMenu called");
         SceneManager.LoadScene("MainMenu");
     }
 } 

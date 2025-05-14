@@ -1,28 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class LoseOnCollision : MonoBehaviour
 {
-    public GameObject gameOverPanel;
-    public Car car;
-    public DrawWithMouse drawControll;
     public GameManager gameManager;
+    
+    //Wywolywane gdy obiekt zderzy sie z przeszkoda
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Wall"))
         {
-            Debug.Log("Game Over");
-
+            //Wywoluje metode pokazujaca panel porazki
             if (gameManager != null)
             {
                 gameManager.ShowGameOverPanel();
-            }
-            else
-            {
-                Debug.LogError("GameManager reference not set in LoseOnCollision script!");
             }
         }
     }
