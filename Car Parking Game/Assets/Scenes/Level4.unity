@@ -503,7 +503,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31645c992b78ed04fa94ba166d8cc6b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinManager: {fileID: 2095594948}
+  coinManager: {fileID: 2106217654}
 --- !u!61 &132613397
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2275,7 +2275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31645c992b78ed04fa94ba166d8cc6b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinManager: {fileID: 2095594948}
+  coinManager: {fileID: 2106217654}
 --- !u!61 &820754335
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2649,10 +2649,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3962b8532e440864aad0dfcc33bc2145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameOverPanel: {fileID: 1426171118}
-  car: {fileID: 892354924}
-  drawControll: {fileID: 892354925}
-  gameManager: {fileID: 2095594946}
+  gameManager: {fileID: 2106217652}
 --- !u!50 &892354927
 Rigidbody2D:
   serializedVersion: 4
@@ -3139,7 +3136,6 @@ GameObject:
   - component: {fileID: 1210963051}
   - component: {fileID: 1210963050}
   - component: {fileID: 1210963049}
-  - component: {fileID: 1210963048}
   m_Layer: 5
   m_Name: MenuButton
   m_TagString: Untagged
@@ -3167,18 +3163,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -161.58}
   m_SizeDelta: {x: 177.3458, y: 40.8411}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1210963048
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1210963046}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04b536c59b4dfe842b775623076ed06a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1210963049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3222,19 +3206,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1210963050}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1210963048}
-        m_TargetAssemblyTypeName: ButtonHandler, Assembly-CSharp
-        m_MethodName: ReturnToMainMenu
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1210963050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3305,7 +3277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parkingAngleTolerance: 15
-  coinRatingSystem: {fileID: 2095594945}
+  coinRatingSystem: {fileID: 2106217653}
   gameManager: {fileID: 0}
 --- !u!61 &1401379729
 BoxCollider2D:
@@ -4624,7 +4596,6 @@ GameObject:
   - component: {fileID: 1975985706}
   - component: {fileID: 1975985705}
   - component: {fileID: 1975985704}
-  - component: {fileID: 1975985703}
   m_Layer: 5
   m_Name: MenuButton
   m_TagString: Untagged
@@ -4652,18 +4623,6 @@ RectTransform:
   m_AnchoredPosition: {x: 199, y: -103.48}
   m_SizeDelta: {x: 240.6571, y: 55.522}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1975985703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1975985701}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04b536c59b4dfe842b775623076ed06a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1975985704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4707,19 +4666,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1975985705}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1975985703}
-        m_TargetAssemblyTypeName: ButtonHandler, Assembly-CSharp
-        m_MethodName: ReturnToMainMenu
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1975985705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4804,7 +4751,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31645c992b78ed04fa94ba166d8cc6b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinManager: {fileID: 2095594948}
+  coinManager: {fileID: 2106217654}
 --- !u!61 &2065271782
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5054,7 +5001,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &2095594944
+--- !u!1 &2106217649
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5062,12 +5009,12 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2095594950}
-  - component: {fileID: 2095594948}
-  - component: {fileID: 2095594945}
-  - component: {fileID: 2095594946}
-  - component: {fileID: 2095594947}
-  - component: {fileID: 2095594949}
+  - component: {fileID: 2106217655}
+  - component: {fileID: 2106217654}
+  - component: {fileID: 2106217653}
+  - component: {fileID: 2106217652}
+  - component: {fileID: 2106217651}
+  - component: {fileID: 2106217650}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -5075,89 +5022,14 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2095594945
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2095594944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e50d978a7c8cc7f4d8c1214e68e90c4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coinManager: {fileID: 2095594948}
-  resultPanel: {fileID: 843027688}
-  resultText: {fileID: 174465208}
-  messageText: {fileID: 1639333759}
-  gameManager: {fileID: 2095594946}
-  coinIcons:
-  - {fileID: 797348366}
-  - {fileID: 124713078}
-  - {fileID: 566662860}
-  restartButton: {fileID: 675178000}
-  nextLevelButton: {fileID: 780729911}
-  totalCoins: 3
-  nextLevelName: 
---- !u!114 &2095594946
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2095594944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b35faf04c75b6ae4aa98875576260e33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameOverPanel: {fileID: 1426171118}
-  levelCompletePanel: {fileID: 0}
-  restartButton: {fileID: 675178000}
-  mainMenuButton: {fileID: 1210963049}
-  menuButton: {fileID: 0}
-  nextLevelButton: {fileID: 780729911}
-  nextLevelName: Level2
-  carController: {fileID: 892354924}
-  drawController: {fileID: 2095594947}
---- !u!114 &2095594947
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2095594944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba7e1f84ac7476943b3c4ad67fbdb08c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  line: {fileID: 0}
-  minDistance: 0.1
-  width: 0.1
---- !u!114 &2095594948
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2095594944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85a3876aacd7fbf4b997a5e8991ecf8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coinCount: 0
-  coinText: {fileID: 1867294014}
---- !u!120 &2095594949
+--- !u!120 &2106217650
 LineRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2095594944}
+  m_GameObject: {fileID: 2106217649}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -5254,13 +5126,87 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
---- !u!4 &2095594950
+--- !u!114 &2106217651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2106217649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba7e1f84ac7476943b3c4ad67fbdb08c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  line: {fileID: 0}
+  minDistance: 0.1
+  width: 0.1
+--- !u!114 &2106217652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2106217649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b35faf04c75b6ae4aa98875576260e33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameOverPanel: {fileID: 1426171118}
+  levelCompletePanel: {fileID: 0}
+  restartButton: {fileID: 1969579225}
+  menuButton: {fileID: 1210963049}
+  nextLevelButton: {fileID: 780729911}
+  nextLevelName: MainMenu
+  carController: {fileID: 892354924}
+  drawController: {fileID: 2106217651}
+--- !u!114 &2106217653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2106217649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e50d978a7c8cc7f4d8c1214e68e90c4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinManager: {fileID: 2106217654}
+  resultPanel: {fileID: 843027688}
+  resultText: {fileID: 174465208}
+  messageText: {fileID: 1639333759}
+  gameManager: {fileID: 2106217652}
+  coinIcons:
+  - {fileID: 797348366}
+  - {fileID: 124713078}
+  - {fileID: 566662860}
+  restartButton: {fileID: 675178000}
+  nextLevelButton: {fileID: 780729911}
+  totalCoins: 3
+  nextLevelName: MainMenu
+--- !u!114 &2106217654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2106217649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85a3876aacd7fbf4b997a5e8991ecf8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinCount: 0
+  coinText: {fileID: 1867294014}
+--- !u!4 &2106217655
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2095594944}
+  m_GameObject: {fileID: 2106217649}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.0198011, y: 0.37608898, z: 0.031648997}
@@ -5280,5 +5226,5 @@ SceneRoots:
   - {fileID: 2070289396}
   - {fileID: 892354931}
   - {fileID: 1202772321}
-  - {fileID: 2095594950}
   - {fileID: 1401379731}
+  - {fileID: 2106217655}

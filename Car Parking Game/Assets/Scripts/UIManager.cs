@@ -13,17 +13,16 @@ public class UIManager : MonoBehaviour
     public Button startButton;
     public Button quitButton;
     public Button tutorialButton;
-    public Button skipTutorialButton; // Optional button to skip tutorial
+    public Button skipTutorialButton;
 
     private TutorialManager tutorialManager;
 
     void Start()
     {
-        // Ensure the start game panel is visible
+        //panel startowy widoczny
         if (startGamePanel != null)
             startGamePanel.SetActive(true);
 
-        // Setup button listeners
         if (startButton != null)
             startButton.onClick.AddListener(StartGame);
         
@@ -33,38 +32,21 @@ public class UIManager : MonoBehaviour
         if (tutorialButton != null)
             tutorialButton.onClick.AddListener(StartTutorial);
             
-        // Find tutorial manager if we're in the tutorial scene
-        tutorialManager = FindObjectOfType<TutorialManager>();
-        
-        // Setup skip tutorial button if available
-        if (skipTutorialButton != null && tutorialManager != null)
-        {
-            skipTutorialButton.onClick.AddListener(SkipTutorial);
-        }
     }
 
-    // Start the first level
+    //Rozpoczyna pierwszy poziom
     public void StartGame()
     {
         SceneManager.LoadScene("Level1");
     }
     
-    // Start the tutorial level
+    //Rozpoczyna samouczek
     public void StartTutorial()
     {
         SceneManager.LoadScene("Tutorial");
     }
     
-    // Skip the tutorial
-    public void SkipTutorial()
-    {
-        if (tutorialManager != null)
-        {
-            tutorialManager.SkipTutorial();
-        }
-    }
-
-    // Quit the game
+    //Wychodzi z gry
     public void QuitGame()
     {
         #if UNITY_EDITOR

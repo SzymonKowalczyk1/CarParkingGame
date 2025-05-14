@@ -5,21 +5,12 @@ using UnityEngine.UI;
 
 public class TutorialParkingSpot : MonoBehaviour
 {
-    public TutorialManager tutorialManager;
-    public GameObject successIndicator;
+    public TutorialManager tutorialManager; 
     public GameObject directionArrow;
     
-    [SerializeField] private float parkingAngleTolerance = 15f;
+    [SerializeField] private float parkingAngleTolerance = 15f; // Tolerancja kata parkowania
     
-    private bool isOccupied = false;
-    
-    void Start()
-    {
-        if (successIndicator != null)
-            successIndicator.SetActive(false);
-    }
-    
-    // Public method to skip the tutorial
+    //Metoda do pominiecia samouczka
     public void SkipTutorial()
     {
         if (tutorialManager != null)
@@ -27,13 +18,10 @@ public class TutorialParkingSpot : MonoBehaviour
             tutorialManager.SkipTutorial();
         }
     }
-    
+ 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Skip if already occupied
-        if (isOccupied) return;
-
-        // Check if it's the player's car
+        // sprawdza czy to samochod gracza
         if (collision.CompareTag("Player"))
         {
             Car car = collision.GetComponent<Car>();
@@ -44,12 +32,10 @@ public class TutorialParkingSpot : MonoBehaviour
         }
     }
     
+  
     private void OnTriggerStay2D(Collider2D collision)
     {
-        // Skip if already occupied
-        if (isOccupied) return;
-
-        // Check if it's the player's car
+        //Sprawdza czy to samochod gracza
         if (collision.CompareTag("Player"))
         {
             Car car = collision.GetComponent<Car>();
@@ -60,52 +46,47 @@ public class TutorialParkingSpot : MonoBehaviour
         }
     }
     
+    //Sprawdza czy samochod jest prawidlowo zaparkowany
     private void CheckParking(Car car)
     {
-        // Check if car is still moving
+        //Sprawdza czy samochod nadal sie porusza
         if (car.GetCurrentSpeed() > 0.1f)
             return;
 
-        // Check if car is properly aligned with parking spot
+        //Sprawdza czy samochod jest prawidlowo ustawiony wzgledem miejsca parkingowego
         float angleDifference = Mathf.Abs(Mathf.DeltaAngle(car.transform.eulerAngles.z, transform.eulerAngles.z));
         if (angleDifference > parkingAngleTolerance)
             return;
 
-        // Car is parked correctly!
-        isOccupied = true;
-        
-        // Show success indicator
-        if (successIndicator != null)
-            successIndicator.SetActive(true);
+
             
-        // Hide direction arrow
+        //Ukrywa strzalke kierunku
         if (directionArrow != null)
             directionArrow.SetActive(false);
         
-        // Make the parking spot change color to indicate success
+        //Zmien kolor miejsca parkingowego na zielony
         SpriteRenderer sprite = GetComponent<SpriteRenderer>();
         if (sprite != null)
         {
             sprite.color = Color.green;
         }
         
-        // Optional: Disable car controls to prevent further movement
+        //Wylacza kontroler samochodu aby zapobiec dalszemu ruchowi
         if (car.drawControll != null)
         {
             car.enabled = false;
         }
         
-        // Notify tutorial manager of success
         if (tutorialManager != null)
         {
-            // Check if tutorial is active or was skipped
+            //Sprawdza czy samouczek jest aktywny czy zostal pominiety
             if (tutorialManager.IsTutorialActive())
             {
                 tutorialManager.NextTutorialStep();
             }
             else
             {
-                // Tutorial was skipped, directly show completion
+                //aktywuje panel ukonczenia samouczka
                 tutorialManager.ShowTutorialComplete();
             }
         }

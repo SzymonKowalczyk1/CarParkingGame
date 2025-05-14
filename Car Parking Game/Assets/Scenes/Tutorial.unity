@@ -1905,7 +1905,6 @@ GameObject:
   - component: {fileID: 867816038}
   - component: {fileID: 867816037}
   - component: {fileID: 867816036}
-  - component: {fileID: 867816035}
   m_Layer: 5
   m_Name: MenuButton
   m_TagString: Untagged
@@ -1933,18 +1932,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -120.740005}
   m_SizeDelta: {x: 177.3458, y: 40.8411}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &867816035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 867816033}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04b536c59b4dfe842b775623076ed06a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &867816036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1988,19 +1975,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 867816037}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 867816035}
-        m_TargetAssemblyTypeName: ButtonHandler, Assembly-CSharp
-        m_MethodName: ReturnToMainMenu
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &867816037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3585,7 +3560,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorialManager: {fileID: 471188740}
-  successIndicator: {fileID: 0}
   directionArrow: {fileID: 0}
   parkingAngleTolerance: 15
 --- !u!1 &1536177524
@@ -3886,9 +3860,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3962b8532e440864aad0dfcc33bc2145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameOverPanel: {fileID: 0}
-  car: {fileID: 1765240379}
-  drawControll: {fileID: 1765240380}
   gameManager: {fileID: 0}
 --- !u!50 &1765240382
 Rigidbody2D:

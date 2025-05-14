@@ -4,27 +4,20 @@ using UnityEngine;
 
 public class ParkingSpot : MonoBehaviour
 {
-    [SerializeField] private float parkingAngleTolerance = 15f;
+    [SerializeField] private float parkingAngleTolerance = 15f; //Tolerancja kata parkowania w stopniach
     [SerializeField] private CoinRatingSystem coinRatingSystem;
     [SerializeField] private GameManager gameManager;
 
-    private bool levelCompleted = false;
+    private bool levelCompleted = false; //Flaga ukonczenia poziomu
 
-    private void Start()
-    {
-        // If gameManager is not assigned, try to find it in the scene
-        if (gameManager == null)
-        {
-            gameManager = FindObjectOfType<GameManager>();
-        }
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Skip if level already completed
-        if (levelCompleted) return;
+        
 
-        // Check if it's the player's car
+        if (levelCompleted) return;
+        
+        //Sprawdza czy to samochod gracza
         if (collision.CompareTag("Player"))
         {
             Car car = collision.GetComponent<Car>();
@@ -35,12 +28,13 @@ public class ParkingSpot : MonoBehaviour
         }
     }
     
+
     private void OnTriggerStay2D(Collider2D collision)
     {
-        // Skip if level already completed
+        //Pomija jesli poziom jest juz ukonczony
         if (levelCompleted) return;
 
-        // Check if it's the player's car
+        //Sprawdza czy to samochod gracza
         if (collision.CompareTag("Player"))
         {
             Car car = collision.GetComponent<Car>();
@@ -51,47 +45,35 @@ public class ParkingSpot : MonoBehaviour
         }
     }
     
+    //Sprawdza czy samochod jest prawidlowo zaparkowany
     private void CheckParking(Car car)
     {
-        // Check if car is still moving
+        //Sprawdza czy samochod nadal sie porusza
         if (car.GetCurrentSpeed() > 0.1f)
             return;
 
-        // Check if car is properly aligned with parking spot
+        //Sprawdza czy samochod jest prawidlowo ustawiony wzgledem miejsca parkingowego
         float angleDifference = Mathf.Abs(Mathf.DeltaAngle(car.transform.eulerAngles.z, transform.eulerAngles.z));
         if (angleDifference > parkingAngleTolerance)
             return;
 
-        // Car is parked correctly!
+        //Samochod zostal prawidlowo zaparkowany
         levelCompleted = true;
-        Debug.Log("Success! Car parked correctly.");
 
-        // Show coin rating if available
+        //Pokazuje ocene za pomoca monet
         if (coinRatingSystem != null)
         {
             coinRatingSystem.ShowRating();
         }
-        else
-        {
-            // If no coin rating system, use the game manager to show level complete
-            if (gameManager != null)
-            {
-                gameManager.ShowLevelCompletePanel();
-            }
-            else
-            {
-                Debug.LogWarning("Both CoinRatingSystem and GameManager references are missing on ParkingSpot!");
-            }
-        }
 
-        // Make the parking spot change color to indicate success
+        //Zmienia kolor miejsca parkingowego na zielony
         SpriteRenderer sprite = GetComponent<SpriteRenderer>();
         if (sprite != null)
         {
             sprite.color = Color.green;
         }
 
-        // Optional: Disable car controls to prevent further movement
+        //Wylacza kontroler samochodu aby zapobiec dalszemu ruchowi
         if (car.drawControll != null)
         {
             car.enabled = false;

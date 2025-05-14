@@ -11,7 +11,7 @@ public class TutorialCompletePanel : MonoBehaviour
     
     void Start()
     {
-        // Make sure buttons have correct listeners
+        //Konfiguracja przyciskow
         if (nextLevelButton != null)
         {
             TutorialManager tutorialManager = FindObjectOfType<TutorialManager>();
@@ -30,7 +30,7 @@ public class TutorialCompletePanel : MonoBehaviour
             }
         }
         
-        // Hide panel at start
+        //Ukrywa panel na poczatku
         gameObject.SetActive(false);
     }
 } 

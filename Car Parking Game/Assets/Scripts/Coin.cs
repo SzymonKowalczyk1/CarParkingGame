@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    public CoinManager coinManager;
+    public CoinManager coinManager; 
+    
+    //Wywolywane gdy inny obiekt wejdzie w obszar monety
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player")){
-            Debug.Log("Coin collected!");
+            //Zwieksza licznik monet i niszczy obiekt monety
             coinManager.coinCount++;
             Destroy(gameObject);
         }
