@@ -1213,6 +1213,7 @@ MonoBehaviour:
   nextLevelButton: {fileID: 1233519565}
   menuButton: {fileID: 867816036}
   skipButton: {fileID: 958689800}
+  restartButton: {fileID: 1399419596}
   tutorialSteps:
   - Welcome to Car Parking Game!
   - Click and drag to draw a path for your car

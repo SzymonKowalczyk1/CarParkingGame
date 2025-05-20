@@ -62,11 +62,11 @@ public class CoinRatingSystem : MonoBehaviour
         //Pokaz panel wynikow
         resultPanel.SetActive(true);
 
-        //Zaktualizuj tekst wyniku
+        //Aktualizuje tekst wyniku
         if (resultText != null)
             resultText.text = "Coins Collected: " + collectedCoins + "/" + totalCoins;
 
-        //Zaktualizuj wiadomosc na podstawie zebranych monet
+        //Aktualizuje wiadomosc na podstawie zebranych monet
         if (messageText != null)
         {
             switch (collectedCoins)
@@ -89,7 +89,7 @@ public class CoinRatingSystem : MonoBehaviour
             }
         }
 
-        //Aktualizuje ikony monet
+        //Aktualizuje ikony monet w ekranie wynikow
         for (int i = 0; i < coinIcons.Length; i++)
         {
             if (coinIcons[i] != null)

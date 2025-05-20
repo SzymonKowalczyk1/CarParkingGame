@@ -33,32 +33,15 @@ public class GameManager : MonoBehaviour
         if (levelCompletePanel != null)
             levelCompletePanel.SetActive(false);
 
-        //Przypisanie listenera do przycisku restartu
-        if (restartButton != null)
-        {
-            restartButton.onClick.RemoveAllListeners();
-            restartButton.onClick.AddListener(RestartLevel);
-        }
-        
+       
         //Przypisanie listenera do przycisku menu glownego
         if (menuButton != null)
         {
             menuButton.onClick.RemoveAllListeners();
             menuButton.onClick.AddListener(ReturnToMainMenu);
         }
+
         
-        //Przypisanie listenera do przycisku nastepnego poziomu
-        if (nextLevelButton != null)
-        {
-            nextLevelButton.onClick.RemoveAllListeners();
-            nextLevelButton.onClick.AddListener(LoadNextLevel);
-        }
-        
-        // Znajdz CoinRatingSystem jesli nie jest przypisany
-        if (coinRatingSystem == null)
-        {
-            coinRatingSystem = FindObjectOfType<CoinRatingSystem>();
-        }
     }
 
     //Wyswietla panel porazki po kolizji

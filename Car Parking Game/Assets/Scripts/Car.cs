@@ -30,8 +30,8 @@ public class Car : MonoBehaviour
             drawControll.UpdateLine();
         }
     }
-    
-    //Wywolanie po puszczeniu przycisku myszy
+
+    //Wywolanie po puszczeniu przycisku myszy zapisuje trase i zacyna ruch
     private void OnMouseUp()
     { 
         if (!startMovment && !isGameOver)
@@ -59,14 +59,14 @@ public class Car : MonoBehaviour
 
             //Obraca samochod w kierunku ruchu
             Vector2 dir = currentPos - (Vector2)transform.position;
-            if (dir.magnitude > 0.01f) //Obraca tylko jesli mamy znaczacy kierunek
+            if (dir.magnitude > 0.01f)
             {
                 float angle = Mathf.Atan2(dir.normalized.y, dir.normalized.x);
                 transform.rotation = Quaternion.Slerp(transform.rotation,
                     Quaternion.Euler(0f, 0f, angle * Mathf.Rad2Deg - 90f), speed * Time.deltaTime);
             }
 
-            //Sprawdza czy osiagnieto pozycje docelowa
+            //Przechodzi do kolejnego punktu jesli dotarl do obecnego
             float distance = Vector2.Distance(currentPos, transform.position);
             if (distance <= 0.1f)
             {
