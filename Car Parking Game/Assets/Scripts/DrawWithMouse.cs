@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 
 public class DrawWithMouse : MonoBehaviour
 {
@@ -13,11 +14,12 @@ public class DrawWithMouse : MonoBehaviour
     [SerializeField, Range(0.1f,2f)]
     private float width; //Szerokosc linii
 
-    
+
+
     private void Start()
     {
         line = GetComponent<LineRenderer>();
-        line.positionCount = 1; 
+        line.positionCount = 1; //punkt startowy
         previousPosition = transform.position;
     }
     
@@ -25,9 +27,8 @@ public class DrawWithMouse : MonoBehaviour
     public void StartLine(Vector2 position)
     {
         line.positionCount = 1;
-        line.SetPosition(0, position);
+        line.SetPosition(0, position); //liia zaczyna sie od pozycji samochodu -bug
         line.startWidth = line.endWidth = width;
-
         previousPosition = position; //Ustawia poprzednia pozycje na punkt poczatkowy
     }
 
@@ -45,7 +46,7 @@ public class DrawWithMouse : MonoBehaviour
             {
                 if(previousPosition == transform.position)
                 {
-                    line.SetPosition(0, currentPosition);
+                    line.SetPosition(0, currentPosition); //ustawia punkt poczatkowy na aktualna pozycje
                 }
                 line.positionCount++;
                 line.SetPosition(line.positionCount - 1, currentPosition);

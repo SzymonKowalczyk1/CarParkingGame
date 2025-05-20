@@ -13,7 +13,8 @@ public class UIManager : MonoBehaviour
     public Button startButton;
     public Button quitButton;
     public Button tutorialButton;
-    public Button skipTutorialButton;
+    public Button creditsButton;
+    public Button backButton;
 
     private TutorialManager tutorialManager;
 
@@ -31,7 +32,12 @@ public class UIManager : MonoBehaviour
             
         if (tutorialButton != null)
             tutorialButton.onClick.AddListener(StartTutorial);
-            
+
+        if (creditsButton != null)
+            creditsButton.onClick.AddListener(Credits);
+
+        if (backButton != null)
+            backButton.onClick.AddListener(Back);
     }
 
     //Rozpoczyna pierwszy poziom
@@ -44,6 +50,16 @@ public class UIManager : MonoBehaviour
     public void StartTutorial()
     {
         SceneManager.LoadScene("Tutorial");
+    }
+
+    public void Credits()
+    {
+        SceneManager.LoadScene("Credits");
+    }
+
+    public void Back()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
     
     //Wychodzi z gry
